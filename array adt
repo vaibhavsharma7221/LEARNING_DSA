@@ -1,0 +1,205 @@
+//array adt(small error inbetween)
+
+#include<iostream>
+using namespace std;
+
+class arrayadt
+{
+    private:
+    int capacity;
+    int lastindex;
+    int *ptr;
+    
+    
+    public:
+    arrayadt()
+    {
+        capacity=0;
+        lastindex=-1;
+        ptr=NULL;
+    }
+    
+    void createarray(int capacity);
+    int getitem(int index);   
+    void setitem(int index,int value);
+    void edititem(int index,int value);
+    int countitems();
+    void removeitem(int index);
+    int searchitem(int value);
+    void sortarray();
+    friend ostream& operator <<(ostream&,arrayadt);
+
+    
+    ~arrayadt()
+     {
+        delete []ptr;
+        
+     }    
+      
+     arrayadt(arrayadt &list)
+     {
+         capacity=list.capacity;
+         lastindex=list.lastindex;
+         ptr=new int[capacity];
+         for(int i=0;i<list.lastindex;i++)
+         {
+             ptr[i]=list.ptr[i];
+         }
+     }
+};
+
+void arrayadt::createarray(int capacity)
+{
+    this->capacity=capacity;
+    lastindex=-1;
+    ptr=new int[capacity];
+}
+
+
+int arrayadt::getitem(int index)
+{
+if(lastindex==-1)
+{
+    cout<<"\n list is empty";
+}
+if(index>lastindex||index<0)
+{
+    cout<<"\n invalid index";
+    return(-1);
+}
+return (ptr[index]); 
+}
+
+
+void arrayadt::setitem(int index,int value)
+{
+    int i;
+    if(lastindex==capacity-1)
+    {
+        cout<<"\noverflow";
+    }
+    else if(index>capacity-1||index<0)
+    {
+        cout<<"\n invalid index";
+    }
+    else if(index>lastindex+1)
+    {
+        cout<<"\ninvalid index";
+    }
+    else if(index<=lastindex)
+    {
+        lastindex++;
+        i=lastindex;
+        while(i!=index)
+        {
+            ptr[i]=ptr[i-1];
+            i--;
+        }
+        ptr[index]=value;
+    }
+    else if(index==lastindex+1)
+    {
+    lastindex++;
+    ptr[index]=value;
+    }
+}
+
+void arrayadt::edititem(int index,int value)
+{
+    if(index<0||index>lastindex)
+    {
+        cout<<"invalid index";
+    }
+    else
+    ptr[index]=value;
+}
+
+int arrayadt::countitems()
+{
+    return(lastindex+1);
+}
+
+void arrayadt::removeitem(int index)
+{
+    int i;
+    if(index<0||index>lastindex)
+    {
+        cout<<"\neither invalid index or overflow";
+    }
+    else if(index<lastindex)
+    {
+        i=index;
+        while(i!=lastindex)
+        {
+            ptr[i]=ptr[i+1];
+            i++;
+        }
+        lastindex--;
+    }
+    else if(index==lastindex)
+    {
+        lastindex--;
+    }
+}
+
+int arrayadt::searchitem(int value)
+{
+    if(lastindex==-1)
+    {
+        cout<<"\nlist is empty";
+        return(-1);
+    }
+    
+    int i;
+    for(i=0;i<=lastindex;i++)
+    {
+        if(ptr[i]==value)
+        {
+            return i;
+        }
+    }
+    return(-1);
+}
+
+void arrayadt::sortarray()
+{
+    int r,i,c,t;
+    for(r=1;r<countitems();r++)
+    {
+       for(i=0;i<countitems()-r;i++)
+       {
+           if(ptr[i]>ptr[i+1])
+           {
+            t=ptr[i];
+            ptr[i]=ptr[i+1];
+            ptr[i+1]=t;
+           }
+       }
+    }
+}
+
+ostream& operator <<(ostream &dout, arrayadt l)
+{
+    if(l.lastindex==-1)
+    {
+        dout<<"list is empty";
+    }
+    for(int i=0;i<l.countitems();i++)
+    {
+        dout<<" "<<l.getitem(i);
+    }
+    return dout;
+}
+
+int main()
+{
+    arrayadt l1;
+    l1.createarray(7);
+    l1.setitem(0,10);
+    l1.setitem(1,20);
+    l1.setitem(2,30);
+    l1.setitem(3,40);
+    cout<<l1;
+
+    return 0;
+}
