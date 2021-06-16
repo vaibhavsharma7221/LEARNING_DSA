@@ -1,0 +1,33 @@
+//max till i       
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int s,i;
+    cout<<"enter size of array :";
+    cin>>s;
+    int arr[s];
+    for(i=0;i<s;i++)
+    {
+        cin>>arr[i];
+    }
+    
+   int maxi=INT_MIN;
+    
+    for(i=0;i<s;i++)
+    {
+        if(arr[i]>maxi)
+        {
+        maxi=arr[i];
+        }
+        arr[i]=maxi;
+    }
+    
+    for(i=0;i<s;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
