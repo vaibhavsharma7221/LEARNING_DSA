@@ -23,11 +23,8 @@ int main()
         maxi=arr[i];
         }
         arr[i]=maxi;
-    }
-    
-    for(i=0;i<s;i++)
-    {
         cout<<arr[i]<<" ";
     }
+    
     return 0;
 }
