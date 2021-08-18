@@ -1,0 +1,111 @@
+#include<iostream>
+using namespace std;
+
+void insert(int s,int l,int arr[])
+{
+    int n,i;
+    cin>>n>>i;
+    
+    l++;
+    int x=l;
+    
+    while(x>i)
+    {
+        arr[x]=arr[x-1];
+        x--;
+    }
+   
+    arr[i]=n; 
+    
+    cout<<"array after insertion :";
+    
+    for(int i=0;i<l;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<"\n";
+    
+}
+
+void deletearr(int s,int l,int arr[])
+{
+    int i;
+    cin>>i;
+    
+    
+    while(i<l)
+    {
+        arr[i]=arr[i+1];
+        i++;
+    }
+    
+    l--;
+    
+    cout<<"array after deletion :";
+    
+    for(int i=0;i<l;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<"\n";
+}
+
+void searcharr(int s,int l,int arr[])
+{
+    int n;
+    cin>>n;
+    
+    int i;
+    for(i=0;i<l;i++)
+    {
+        if(arr[i]==n)
+           break;
+    }
+    if(arr[i]==n)
+    {
+        cout<<"match found at index :"<<i;
+    }
+    else
+        cout<<"no match found";
+}
+
+void printarr(int s,int l,int arr[])
+{
+    for(int i=0;i<l;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
+
+int main()
+{
+    int s,l;
+    cout<<"enter size :";
+    cin>>s;
+    cout<<"enter length :";
+    cin>>l;
+    int arr[s];
+    
+    cout<<"enter elements :";
+    
+    for(int i=0;i<l;i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<"enter number to be instered and specify index where id to be inserted :";
+    insert(s,l,arr);
+    l++;
+    
+    cout<<"enter index of element which is to be deleted :";
+    deletearr(s,l,arr);
+    l--;
+    
+    cout<<"enter the number which is to be searched :";
+    searcharr(s,l,arr);
+    cout<<"\n";
+    
+    cout<<"press enter to print array :";
+    printarr(s,l,arr);
+    
+    return 0;
+}
